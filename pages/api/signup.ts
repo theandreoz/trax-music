@@ -44,5 +44,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   )
 
-  res.json(user);
+  res.json({
+    "createdAt": user.createdAt,
+    "email": user.email,
+    "id": user.id,
+    "updatedAt": user.updatedAt,
+  });
 }
