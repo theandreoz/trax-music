@@ -29,7 +29,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     id: user.id,
     time: Date.now(),
   },
-  'hello, this is the secret',
+  'hello',
   { expiresIn: '8h' },
   )
 
@@ -44,5 +44,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   )
 
-  res.json(user);
+  res.json({
+    "createdAt": user.createdAt,
+    "email": user.email,
+    "id": user.id,
+    "updatedAt": user.updatedAt,
+  });
 }
