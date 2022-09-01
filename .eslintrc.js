@@ -39,11 +39,11 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-    'prettier/prettier': [
-      'warn',
-      {
-        singleQuote: true,
-      },
-    ],
+    // 'prettier/prettier': [
+    //   'warn',
+    //   {
+    //     singleQuote: true,
+    //   },
+    // ],
   },
 };
