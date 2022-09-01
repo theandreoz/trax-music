@@ -1,6 +1,6 @@
 import { Box, Flex, Input, Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useSWRConfig } from 'swr';
+// import { useSWRConfig } from 'swr';
 import { FC, useState } from 'react';
 import NextImage from 'next/image';
 
