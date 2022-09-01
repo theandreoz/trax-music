@@ -19,6 +19,7 @@ import {
   MdPlaylistAdd,
   MdFavorite,
 } from 'react-icons/md';
+import { usePlaylist } from '../lib/hooks';
 
 const navMenu = [
   {
@@ -36,7 +37,7 @@ const navMenu = [
     icon: MdLibraryMusic,
     route: '/library',
   },
-]
+];
 
 const musicMenu = [
   {
@@ -49,31 +50,37 @@ const musicMenu = [
     icon: MdFavorite,
     route: '/favorites',
   },
-]
+];
 
-const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`)
+// const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`)
 
 const Sidebar = () => {
+  const { playlists } = usePlaylist();
+  console.log(playlists);
   return (
     <Box
-      width="100%"
-      height="calc(100vh - 100px)"
-      bg="black"
-      paddingX="5px"
-      color="gray"
+      width='100%'
+      height='calc(100vh - 100px)'
+      bg='black'
+      paddingX='5px'
+      color='gray'
     >
-      <Box paddingY="20px" height="100%">
-        <Box width="120px" marginBottom="20px" paddingX="20px">
-          <NextImage src="/logo.svg" height={60} width={120} />
+      <Box paddingY='20px' height='100%'>
+        <Box width='120px' marginBottom='20px' paddingX='20px'>
+          <NextImage src='/logo.svg' height={60} width={120} />
         </Box>
-        <Box marginBottom="20px">
+        <Box marginBottom='20px'>
           <List spacing={2}>
-            {navMenu.map(menu => (
-              <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
+            {navMenu.map((menu) => (
+              <ListItem paddingX='20px' fontSize='16px' key={menu.name}>
                 <LinkBox>
                   <NextLink href={menu.route} passHref>
                     <LinkOverlay>
-                      <ListIcon as={menu.icon} color="white" marginRight="20px" />
+                      <ListIcon
+                        as={menu.icon}
+                        color='white'
+                        marginRight='20px'
+                      />
                       {menu.name}
                     </LinkOverlay>
                   </NextLink>
@@ -82,32 +89,34 @@ const Sidebar = () => {
             ))}
           </List>
         </Box>
-        <Box marginTop="20px">
-          <List spacing={2} >
-              {musicMenu.map(menu =>(
-                <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
-                  <LinkBox>
+        <Box marginTop='20px'>
+          <List spacing={2}>
+            {musicMenu.map((menu) => (
+              <ListItem paddingX='20px' fontSize='16px' key={menu.name}>
+                <LinkBox>
                   <NextLink href={menu.route} passHref>
                     <LinkOverlay>
-                      <ListIcon as={menu.icon} color="white" marginRight="20px" />
+                      <ListIcon
+                        as={menu.icon}
+                        color='white'
+                        marginRight='20px'
+                      />
                       {menu.name}
                     </LinkOverlay>
                   </NextLink>
                 </LinkBox>
-                </ListItem>
-              ))}
+              </ListItem>
+            ))}
           </List>
         </Box>
-        <Divider bg="gray.800"/>
-        <Box height="66%" overflowY="scroll" paddingY="20px">
+        <Divider bg='gray.800' />
+        <Box height='66%' overflowY='scroll' paddingY='20px'>
           <List spacing={2}>
-            {playlists.map(playlist => (
-              <ListItem paddingX="20px" key={playlist}>
+            {playlists.map((playlist) => (
+              <ListItem paddingX='20px' key={playlist.id}>
                 <LinkBox>
-                  <NextLink href="/" passHref>
-                    <LinkOverlay>
-                      {playlist}
-                    </LinkOverlay>
+                  <NextLink href='/' passHref>
+                    <LinkOverlay>{playlist.name}</LinkOverlay>
                   </NextLink>
                 </LinkBox>
               </ListItem>
@@ -116,7 +125,7 @@ const Sidebar = () => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default Sidebar;
