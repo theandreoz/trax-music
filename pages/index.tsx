@@ -1,7 +1,7 @@
 import GradientLayout from '../components/gradientLayout';
 import prisma from '../lib/prisma';
 
-const Home = ({ artists }) => {
+const Home = (/* { artists } */) => {
   return (
     <GradientLayout
       roundImage='true'
