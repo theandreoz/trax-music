@@ -34,6 +34,8 @@ const run = async () => {
     create: {
       email: 'user@test.com',
       password: bcrypt.hashSync('password', salt),
+      firstName: 'Andres',
+      lastName: 'Olive'
     }
   })
 
@@ -58,11 +60,11 @@ const run = async () => {
 }
 
 run()
-.catch((e) => [
-  console.error(e),
-  process.exit(1)
-])
-.finally(async () => {
-  await prisma.$disconnect
-})
+  .catch((e) => [
+    console.error(e),
+    process.exit(1)
+  ])
+  .finally(async () => {
+    await prisma.$disconnect
+  })
 
