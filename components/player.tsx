@@ -33,6 +33,22 @@ const Player = ({ songs, activeSong }) => {
   const [duration, setduration] = useState(0.0);
   const soundRef = useRef(null);
 
+  useEffect(() => {
+    let timerId;
+
+    if (playing && !isSeeking) {
+      const f = () => {
+        setSeek(soundRef.current.seek());
+        timerId = requestAnimationFrame(f);
+      };
+
+      timerId = requestAnimationFrame(f);
+      return () => cancelAnimationFrame(f);
+    }
+
+    cancelAnimationFrame(timerId);
+  }, [playing, isSeeking]);
+
   const setPlayState = (value) => {
     setPlaying(value);
   };
@@ -163,7 +179,7 @@ const Player = ({ songs, activeSong }) => {
       <Box color='gray.600'>
         <Flex justify='center' align='center'>
           <Box width='10%'>
-            <Text fontSize='xs'>1:21</Text>
+            <Text fontSize='xs'>{formatTime(seek)}</Text>
           </Box>
           <Box width='80%'>
             <RangeSlider
