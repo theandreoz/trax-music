@@ -91,7 +91,11 @@ const Player = () => {
               <RangeSliderTrack bg='gray.800'>
                 <RangeSliderFilledTrack bg='gray.600' />
               </RangeSliderTrack>
+              <RangeSliderThumb index={0} />
             </RangeSlider>
+          </Box>
+          <Box width='10%' textAlign='right'>
+            <Text fontSize='xs'>321</Text>
           </Box>
         </Flex>
       </Box>
