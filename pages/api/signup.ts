@@ -1,36 +1,37 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import cookie from 'cookie';
-import prisma from '../../lib/prisma';
-import { NextApiRequest, NextApiResponse } from 'next';
-
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import cookie from 'cookie'
+import { NextApiRequest, NextApiResponse } from 'next'
+import prisma from '../../lib/prisma'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const salt =  bcrypt.genSaltSync();
-  const { email, password } =req.body;
+  const salt = bcrypt.genSaltSync()
+  const { email, password } = req.body
 
-  let user;
+  let user
 
   try {
     user = await prisma.user.create({
       data: {
         email,
         password: bcrypt.hashSync(password, salt),
-      }
+      },
     })
   } catch (e) {
+    console.log('Error signing up: ', e)
     res.status(401)
-    res.json({ error: 'User already exists.' })
+    res.json({ error: 'User already exists' })
     return
   }
 
-  const token = jwt.sign({
-    email: user.email,
-    id: user.id,
-    time: Date.now(),
-  },
-  'hello',
-  { expiresIn: '8h' },
+  const token = jwt.sign(
+    {
+      email: user.email,
+      id: user.id,
+      time: Date.now(),
+    },
+    'hello',
+    { expiresIn: '8h' }
   )
 
   res.setHeader(
@@ -44,10 +45,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   )
 
-  res.json({
-    "createdAt": user.createdAt,
-    "email": user.email,
-    "id": user.id,
-    "updatedAt": user.updatedAt,
-  });
+  res.json(user)
 }
