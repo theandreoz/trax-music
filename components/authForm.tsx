@@ -26,14 +26,14 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   return (
     <Box height='100vh' width='100vw' bg='black' color='white'>
       <Flex
-        justify='center>'
+        justify='center'
         align='center'
         height='100px'
         borderBottom='white 1px solid'
       >
         <NextImage src='/logo.svg' height={60} width={120} />
       </Flex>
-      <Flex justify='center>' align='center' height='calc(100vh - 100px)'>
+      <Flex justify='center' align='center' height='calc(100vh - 100px)'>
         <Box padding='50px' bg='gray.900' borderRadius='6px'>
           <form onSubmit={handleSubmit}>
             <Input
@@ -52,7 +52,7 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               isLoading={isLoading}
               sx={{
                 '&:hover': {
-                  background: 'green.300',
+                  bg: 'green.300',
                 },
               }}
             >
